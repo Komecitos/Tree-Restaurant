@@ -14,7 +14,7 @@ public class Tree {
 
         if (node!=null){
             if (node.getJenis().equals("Makanan")){
-                System.out.print(node.getNamaItem() +" ");
+                System.out.print(node.getNamaItem() +", ");
             }
             foodDisplayHelper(node.getLeftNode());
             foodDisplayHelper(node.getRightNode());
@@ -51,7 +51,6 @@ public class Tree {
     }
 
     public TreeNode getNode(TreeNode targetValue) {
-
         return getNode(root, targetValue);
     }
 
@@ -92,7 +91,7 @@ public class Tree {
                     bantu = bantu.getRightNode();
 
                 }
-                if (bantu.getNamaItem().equals(bantu.getNamaItem())) {
+                if (bantu.getNamaItem().equals(node.getNamaItem())) {
                     return simpan;
                 }
             }
@@ -153,69 +152,72 @@ public class Tree {
                 return true;
             }
             else {
-//
-//                TreeNode parent = getParent(key);
-//                if (key< parent.data){
-//                    if (bantu.isLeaf()){
-//                        parent.setLeftNode(null);
-//                    } else if (bantu.getRightNode() == null){
-//                        parent.setLeftNode(bantu.getLeftNode());
-//                    } else if (bantu.getLeftNode() == null){
-//                        parent.setLeftNode(bantu.getRightNode());
-//                    } else {
-//                        // simpul bantu punya 2 anak
-//                        TreeNode predeccessor = getPredecessor(bantu);
-//                        TreeNode parentPrede = getParent(predeccessor.data);
-//                        bantu.data = predeccessor.data;
-//
-//                        if (parentPrede != bantu) {
-//                            if (predeccessor.getLeftNode() != null) {
-//                                parentPrede.setRightNode(predeccessor.getLeftNode());
-//                            } else {
-//                                parentPrede.setRightNode(null);
-//                            }
-//                        } else {
-//                            bantu.setLeftNode(predeccessor.getLeftNode());
-//                        }
-//                    }
-//                }
-//                else {
-//                    if (bantu.isLeaf()){
-//                        parent.setRightNode(null);
-//                    } else if (bantu.getRightNode() == null){
-//                        parent.setRightNode(bantu.getLeftNode());
-//                    } else if (bantu.getLeftNode() == null){
-//                        parent.setRightNode(bantu.getRightNode());
-//                    } else {
-//                        // simpul bantu punya 2 anak
-//                        TreeNode predeccessor = getPredecessor(bantu);
-//                        TreeNode parentPrede = getParent(predeccessor.data);
-//                        bantu.data = predeccessor.data;
-//
-//                        if (parentPrede != bantu) {
-//                            if (predeccessor.getLeftNode() != null) {
-//                                parentPrede.setRightNode(predeccessor.getLeftNode());
-//                            } else {
-//                                parentPrede.setRightNode(null);
-//                            }
-//                        } else {
-//                            bantu.setLeftNode(predeccessor.getLeftNode());
-//                        }
-//                    }
-//                }
-//                return true;
+
+                TreeNode parent = getParent(key);
+                if (key.getHarga() < parent.getHarga()){
+                    if (bantu.isLeaf()){
+                        parent.setLeftNode(null);
+                    } else if (bantu.getRightNode() == null){
+                        parent.setLeftNode(bantu.getLeftNode());
+                    } else if (bantu.getLeftNode() == null){
+                        parent.setLeftNode(bantu.getRightNode());
+                    } else {
+                        // simpul bantu punya 2 anak
+                        TreeNode predeccessor = getPredecessor(bantu);
+                        TreeNode parentPrede = getParent(predeccessor);
+                        bantu = predeccessor;
+
+                        if (parentPrede != bantu) {
+                            if (predeccessor.getLeftNode() != null) {
+                                parentPrede.setRightNode(predeccessor.getLeftNode());
+                            } else {
+                                parentPrede.setRightNode(null);
+                            }
+                        } else {
+                            bantu.setLeftNode(predeccessor.getLeftNode());
+                        }
+                    }
+                }
+                else {
+                    if (bantu.isLeaf()){
+                        parent.setRightNode(null);
+                    } else if (bantu.getRightNode() == null){
+                        parent.setRightNode(bantu.getLeftNode());
+                    } else if (bantu.getLeftNode() == null){
+                        parent.setRightNode(bantu.getRightNode());
+                    } else {
+                        // simpul bantu punya 2 anak
+                        TreeNode predeccessor = getPredecessor(bantu);
+                        TreeNode parentPrede = getParent(predeccessor);
+                        bantu = predeccessor;
+
+                        if (parentPrede != bantu) {
+                            if (predeccessor.getLeftNode() != null) {
+                                parentPrede.setRightNode(predeccessor.getLeftNode());
+                            } else {
+                                parentPrede.setRightNode(null);
+                            }
+                        } else {
+                            bantu.setLeftNode(predeccessor.getLeftNode());
+                        }
+                    }
+                }
+                return true;
             }
 
 
         }
-        return false;
 
+    }
+    public TreeNode getnodeName(String targetName){
+        return getnodeName(targetName, root);
     }
     public TreeNode getnodeName(String targetName, TreeNode currentNode) {
         String[] getName = null;
 
         try {
             getName = currentNode.getNamaItem().split("\\s+");
+
         } catch (NullPointerException e) {
             return null;
         }
