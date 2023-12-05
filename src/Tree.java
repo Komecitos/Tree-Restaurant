@@ -12,7 +12,6 @@ public class Tree {
     }
     public void display() {
         displayHelper(root);
-        System.out.println();
     }
 
     public void displayHelper(TreeNode node){
@@ -103,10 +102,10 @@ public class Tree {
 
     public TreeNode getNode(TreeNode targetValue) {
 
-        return getNode(root, targetValue);
+        return getNodeHelper(root, targetValue);
     }
 
-    private TreeNode getNode(TreeNode currentNode, TreeNode targetValue) {
+    private TreeNode getNodeHelper(TreeNode currentNode, TreeNode targetValue) {
         if (currentNode == null) {
             return null;
         }
@@ -114,9 +113,9 @@ public class Tree {
         if (currentNode.getNamaItem().equals(targetValue.getNamaItem())) {
             return currentNode;
         } else if (targetValue.getHarga() < currentNode.getHarga()) {
-            return getNode(currentNode.getLeftNode(), targetValue);
+            return getNodeHelper(currentNode.getLeftNode(), targetValue);
         } else {
-            return getNode(currentNode.getRightNode(), targetValue);
+            return getNodeHelper(currentNode.getRightNode(), targetValue);
         }
     }
 
@@ -261,7 +260,10 @@ public class Tree {
         }
 
     }
-    public TreeNode getnodeName(String targetName, TreeNode currentNode) {
+    public TreeNode getNodeByName(String name){
+        return getNodeByName(name, root);
+    }
+    public TreeNode getNodeByName(String targetName, TreeNode currentNode) {
         String[] getName = null;
 
         try {
@@ -269,11 +271,9 @@ public class Tree {
         } catch (NullPointerException e) {
             return null;
         }
-
         if (currentNode == null) {
             return null;
         }
-
         for (String cek : getName) {
 
             if (cek.equalsIgnoreCase(targetName)&&currentNode.isVisited()==false){
@@ -281,21 +281,21 @@ public class Tree {
                 return currentNode;
             }
         }
-        TreeNode leftResult = getnodeName(targetName, currentNode.getLeftNode());
+        TreeNode leftResult = getNodeByName(targetName, currentNode.getLeftNode());
         if (leftResult != null) {
             return leftResult;
         }
 
-        TreeNode rightResult = getnodeName(targetName, currentNode.getRightNode());
+        TreeNode rightResult = getNodeByName(targetName, currentNode.getRightNode());
         return rightResult;
 
 
     }
-    public TreeNode getnodeHarga(double harga){
-        return getnodeHarga(harga, root);
+    public TreeNode getNodeByPrice(double harga){
+        return Tree.this.getNodeByPrice(harga, root);
     }
 
-    public TreeNode getnodeHarga(double harga, TreeNode currentNode) {
+    public TreeNode getNodeByPrice(double harga, TreeNode currentNode) {
         if (currentNode == null) {
             return null;
         }
@@ -304,12 +304,12 @@ public class Tree {
             return currentNode;
         }
 
-        TreeNode leftResult = getnodeHarga(harga, currentNode.getLeftNode());
+        TreeNode leftResult = Tree.this.getNodeByPrice(harga, currentNode.getLeftNode());
         if (leftResult != null) {
             return leftResult;
         }
 
-        TreeNode rightResult = getnodeHarga(harga, currentNode.getRightNode());
+        TreeNode rightResult = Tree.this.getNodeByPrice(harga, currentNode.getRightNode());
         return rightResult;
 
 
