@@ -143,7 +143,7 @@ public class Tree {
                     bantu = bantu.getRightNode();
 
                 }
-                if (bantu.getNamaItem().equals(bantu.getNamaItem())) {
+                if (bantu.getNamaItem().equals(node.getNamaItem())) {
                     return simpan;
                 }
             }
