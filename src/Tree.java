@@ -10,6 +10,19 @@ public class Tree {
     Tree() {
 
     }
+    public void display() {
+        displayHelper(root);
+        System.out.println();
+    }
+
+    public void displayHelper(TreeNode node){
+
+        if (node!=null){
+            nodes.add(node);
+            displayHelper(node.getLeftNode());
+            displayHelper(node.getRightNode());
+        }
+    }
 
     public void foodDisplay() {
         foodDisplayHelper(root);
@@ -20,7 +33,7 @@ public class Tree {
 
         if (node!=null){
             if (node.getJenis().equals("Makanan")){
-                System.out.print(node.getNamaItem() +"\n");
+                nodes.add(node);
             }
             foodDisplayHelper(node.getLeftNode());
             foodDisplayHelper(node.getRightNode());
@@ -28,7 +41,7 @@ public class Tree {
     }
     public void drinkDisplay() {
         drinkDisplayHelper(root);
-//        System.out.println();
+
     }
 
     public void drinkDisplayHelper(TreeNode node){
@@ -36,10 +49,26 @@ public class Tree {
         if (node!=null){
             if (node.getJenis().equals("Minuman")){
                 nodes.add(node);
-//                System.out.print(node.getNamaItem() +"\n");
+
             }
             drinkDisplayHelper(node.getLeftNode());
             drinkDisplayHelper(node.getRightNode());
+        }
+    }
+    public void snacksDisplay() {
+        snacksDisplayHelper(root);
+
+    }
+
+    public void snacksDisplayHelper(TreeNode node){
+
+        if (node!=null){
+            if (node.getJenis().equals("Snack")){
+                nodes.add(node);
+
+            }
+            snacksDisplayHelper(node.getLeftNode());
+            snacksDisplayHelper(node.getRightNode());
         }
     }
 
