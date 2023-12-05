@@ -260,8 +260,18 @@ public class Tree {
         }
 
     }
-    public TreeNode getNodeByName(String name){
-        return getNodeByName(name, root);
+    public void getNodeByName(String name){
+
+        boolean cek = true;
+        while (cek==true){
+            TreeNode bantu = getNodeByName(name, root);
+            if (bantu!=null){
+                nodes.add(bantu);
+            } else {
+                cek = false;
+            }
+        }
+
     }
     public TreeNode getNodeByName(String targetName, TreeNode currentNode) {
         String[] getName = null;
@@ -291,8 +301,16 @@ public class Tree {
 
 
     }
-    public TreeNode getNodeByPrice(double harga){
-        return Tree.this.getNodeByPrice(harga, root);
+    public void getNodeByPrice(double harga){
+        boolean cek = true;
+        while (cek==true){
+            TreeNode bantu = getNodeByPrice(harga, root);
+            if (bantu!=null){
+                nodes.add(bantu);
+            } else {
+                cek = false;
+            }
+        }
     }
 
     public TreeNode getNodeByPrice(double harga, TreeNode currentNode) {
