@@ -1,10 +1,16 @@
+
+import java.util.LinkedList;
+
+
 public class Tree {
 
     TreeNode root;
+    LinkedList<TreeNode>nodes = new LinkedList<>();
 
     Tree() {
 
     }
+
     public void foodDisplay() {
         foodDisplayHelper(root);
         System.out.println();
@@ -14,10 +20,26 @@ public class Tree {
 
         if (node!=null){
             if (node.getJenis().equals("Makanan")){
-                System.out.print(node.getNamaItem() +", ");
+                System.out.print(node.getNamaItem() +"\n");
             }
             foodDisplayHelper(node.getLeftNode());
             foodDisplayHelper(node.getRightNode());
+        }
+    }
+    public void drinkDisplay() {
+        drinkDisplayHelper(root);
+//        System.out.println();
+    }
+
+    public void drinkDisplayHelper(TreeNode node){
+
+        if (node!=null){
+            if (node.getJenis().equals("Minuman")){
+                nodes.add(node);
+//                System.out.print(node.getNamaItem() +"\n");
+            }
+            drinkDisplayHelper(node.getLeftNode());
+            drinkDisplayHelper(node.getRightNode());
         }
     }
 
@@ -51,6 +73,7 @@ public class Tree {
     }
 
     public TreeNode getNode(TreeNode targetValue) {
+
         return getNode(root, targetValue);
     }
 
@@ -91,7 +114,7 @@ public class Tree {
                     bantu = bantu.getRightNode();
 
                 }
-                if (bantu.getNamaItem().equals(node.getNamaItem())) {
+                if (bantu.getNamaItem().equals(bantu.getNamaItem())) {
                     return simpan;
                 }
             }
@@ -209,22 +232,18 @@ public class Tree {
         }
 
     }
-    public TreeNode getnodeName(String targetName){
-        return getnodeName(targetName, root);
-    }
     public TreeNode getnodeName(String targetName, TreeNode currentNode) {
         String[] getName = null;
 
         try {
             getName = currentNode.getNamaItem().split("\\s+");
-
         } catch (NullPointerException e) {
             return null;
         }
 
-            if (currentNode == null) {
-                return null;
-            }
+        if (currentNode == null) {
+            return null;
+        }
 
         for (String cek : getName) {
 
@@ -243,6 +262,30 @@ public class Tree {
 
 
     }
+    public TreeNode getnodeHarga(double harga){
+        return getnodeHarga(harga, root);
+    }
+
+    public TreeNode getnodeHarga(double harga, TreeNode currentNode) {
+        if (currentNode == null) {
+            return null;
+        }
+        if (currentNode.getHarga() <= harga && currentNode.isVisited()==false){
+            currentNode.setVisited(true);
+            return currentNode;
+        }
+
+        TreeNode leftResult = getnodeHarga(harga, currentNode.getLeftNode());
+        if (leftResult != null) {
+            return leftResult;
+        }
+
+        TreeNode rightResult = getnodeHarga(harga, currentNode.getRightNode());
+        return rightResult;
+
+
+    }
+
     public void reset() {
         setVisitedFalse(root);
     }
@@ -255,5 +298,31 @@ public class Tree {
             setVisitedFalse(node.getRightNode());
         }
     }
+    public TreeNode getnode(){
+        return getnode(root, root);
+    }
+
+    public TreeNode getnode(TreeNode node, TreeNode currentNode) {
+        if (currentNode == null) {
+            return null;
+        }
+        if (currentNode.isVisited()==false){
+            currentNode.setVisited(true);
+            return currentNode;
+        }
+
+        TreeNode leftResult = getnode(node, currentNode.getLeftNode());
+        if (leftResult != null) {
+            return leftResult;
+        }
+
+        TreeNode rightResult = getnode(node, currentNode.getRightNode());
+        return rightResult;
+
+
+    }
+
+
+
 
 }
